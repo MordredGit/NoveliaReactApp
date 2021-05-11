@@ -1,19 +1,27 @@
-import React, { useState } from 'react';
-// import { Switch, Route, Redirect } from 'react-router-dom';
+import React /*, { useState }*/ from 'react';
+// import Landing from "./home";
+import Reader from "./Reader/reader";
+import { Switch, Route } from 'react-router-dom';
+import Navigation from './header';
 
 
 function Main() {
-    const [res, setRes] = useState();
-    const callAPI = () => {
-        fetch("http://localhost:9000/data")
-        .then(res => res.text())
-        .then(res => setRes(res));
-    }
-    callAPI();
+    // const [res, setRes] = useState();
+    // const callAPI = () => {
+    //     fetch("http://localhost:9000/data")
+    //     .then(res => res.text())
+    //     .then(res => setRes(res));
+    // }
+    // callAPI();
     return (
-        <div>
-            <p>{res}</p>
-        </div>
+        <React.Fragment>
+            <Navigation />
+            <Switch>
+                <Route path='/reader' component={() => (
+                    <Reader />
+                )} />
+            </Switch>
+        </React.Fragment>
     )
 }
 
