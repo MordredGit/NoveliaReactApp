@@ -3,8 +3,8 @@ import * as Icons from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem } from "reactstrap";
-import { Container } from "react-bootstrap";
+import { Container, Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem } from "reactstrap";
+// import { Container } from "react-bootstrap";
 
 function NavBarItems({ to, icon, iconSize, text }) {
     return (
@@ -24,7 +24,7 @@ function Navigation() {
         justifyContent: "space-between",
         alignItems: "center",
         padding: "3em 10%",
-        backgroundColor: "transparent"
+        backgroundColor: "rgba(0,0,0,0)"
     };
 
     return (
@@ -42,7 +42,7 @@ function Navigation() {
                         <NavBarItems to="/" icon={Icons.faCompass} size="lg" text="Browse" />
 
                         <NavItem className="ml-auto">
-                            <button className="login">Login</button>
+                            <a href="/login"><button className="login">Login</button></a>
                         </NavItem>
                     </Nav>
                 </Collapse>

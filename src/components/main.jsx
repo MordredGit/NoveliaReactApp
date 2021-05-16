@@ -1,8 +1,9 @@
 import React /*, { useState }*/ from 'react';
 // import Landing from "./home";
 import Reader from "./Reader/reader";
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
 import Navigation from './header';
+import Landing from './home';
 
 
 function Main() {
@@ -13,13 +14,29 @@ function Main() {
     //     .then(res => setRes(res));
     // }
     // callAPI();
+    // const history = useHistory();
     return (
         <React.Fragment>
-            <Navigation />
+            {/* <Navigation /> */}
             <Switch>
-                <Route path='/reader' component={() => (
-                    <Reader />
+                <Route exact path='/' component={()=>(
+                    <div>
+                        <Landing />
+                    </div>
                 )} />
+                <Route exact path='/reader' component={() => (
+                    <div>
+                        <Navigation />
+                        <Reader />
+                    </div>
+                )} />
+                <Route exact path='/login' >
+                    <Redirect push to={'/login/login.html'} />
+                    {/* {useHistory().go(0)} */}
+                </Route>
+                <Route exact path="/bookinfo">
+                    <Redirect push to={'/book/index.html'} />
+                </Route>
             </Switch>
         </React.Fragment>
     )
