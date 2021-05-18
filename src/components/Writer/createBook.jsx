@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {FormGroup, Label, Input} from "./Forms";
 
-const sendBookDetails = (params = {}) => {
+const sendBookDetails = (form) => {
     let response;
     let d = new Date();
     let month = d.getMonth() < 10 ? ("0" + d.getMonth()) : d.getMonth();
@@ -16,9 +16,9 @@ const sendBookDetails = (params = {}) => {
         },
         redirect: "follow",
         referrerPolicy: "no-referrer",
-        body: JSON.stringify({ ...params, date: date })
+        body: JSON.stringify({ ...form, date: date })
     }).then(res => res.text()).then(data => { response = data });
-
+    // console.log(file);
     return (response === "success");
 }
 
@@ -31,6 +31,9 @@ const CreateBook = ({ Author }) => {
         author: Author
     });
 
+    // const [file, setFiles] = useState(null)
+    // const inputRef = useRef()
+
     const handleChange = ({ target }) => {
         let name = target.name;
         let value = target.value;
@@ -40,6 +43,10 @@ const CreateBook = ({ Author }) => {
     return (
         <div style={{border: "3px solid #0061a8", margin: "1px auto", width: "400px", borderRadius: "5%", paddingBottom: "2.5rem"}}>
             <FormGroup><Label><h1>Create Book</h1></Label></FormGroup>
+            {/* <FormGroup>
+                <Label htmlFor="cover">Cover</Label>
+                <Input type="file" name="cover" id="cover" onChange={() => setFiles(inputRef.current.files[0])} ref={inputRef} />
+            </FormGroup> */}
             <FormGroup>
                 <Label htmlFor="name">Name</Label>
                 <Input type="text" name="name" id="name" onChange={handleChange} />

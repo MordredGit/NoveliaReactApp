@@ -16,9 +16,42 @@ const handleRegister = (params = {}) => {
     redirect: "follow",
     referrerPolicy: "no-referrer",
     body: JSON.stringify(params)
-  }).then(res => res.text()).then(data => { response = data });
+  }).then(res => res.text()).then(data => { 
+    response = data;
+    console.log(response);
+    if(response.success === "true") {
+      window.location.href = "/success";
+    } else {
+      window.location.href = "/fail";
+    }
+  });
 
-  return (response === "success");
+  // return (response === "success");
+};
+
+const handleLogin = (params = {}) => {
+  let response;
+  fetch("http://localhost:9000/login", {
+    method: "POST",
+    mode: "cors",
+    cache: "default",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
+    body: JSON.stringify(params)
+  }).then(res => res.text()).then(data => { 
+    response = data;
+    console.log(response);
+    if(response.success === "true") {
+      window.location.href = "/success";
+    } else {
+      window.location.href = "/fail";
+    }
+  
+  });
 }
 
 export default function Login() {
@@ -40,7 +73,7 @@ export default function Login() {
       <div className="container1">
         <div className="forms-container1">
           <div className="signin-signup">
-            <form action="#" className="sign-in-form">
+            <form action="#" className="sign-in-form" onSubmit={() => handleLogin()} >
               <h2 className="title">Sign in</h2>
               <div className="input-field">
                 <i className="fas fa-user"></i>
@@ -101,8 +134,6 @@ export default function Login() {
           </div>
         </div>
       </div>
-
-      <script src="app.js"></script>
     </>
   );
 }

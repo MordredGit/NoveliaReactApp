@@ -58,6 +58,12 @@ function Main() {
                 </Route> */}
                 <Redirect exact from="/browse" to={'/browse/index.html'} />
                 <Redirect exact from="/cards" to={'/card-grid/index.html'} />
+                <Route exact path="/success" component={() => (
+                    <h1>Successful</h1>
+                )} />
+                <Route exact path="/fail" component={() => (
+                    <h1>Failure</h1>
+                )} />
             </Switch>
         </React.Fragment>
     )
