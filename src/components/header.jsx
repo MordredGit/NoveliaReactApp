@@ -38,8 +38,8 @@ function Navigation() {
                 <Collapse isOpen={collapse} navbar>
                     <Nav navbar>
                         <NavBarItems to="/" icon={Icons.faHome} size="lg" text="Home" />
-                        <NavBarItems to="/" icon={Icons.faPenNib} size="lg" text="Create" />
-                        <NavBarItems to="/" icon={Icons.faCompass} size="lg" text="Browse" />
+                        <NavBarItems to="/createBook" icon={Icons.faPenNib} size="lg" text="Create" />
+                        <NavBarItems to="/browse" icon={Icons.faCompass} size="lg" text="Browse" />
 
                         <NavItem className="ml-auto">
                             <a href="/login"><button className="login">Login</button></a>

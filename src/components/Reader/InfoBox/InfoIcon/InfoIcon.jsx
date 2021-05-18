@@ -5,13 +5,13 @@ import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { StyledInfoIcon } from "./InfoIcon.styled";
 
 const InfoIcon = ({ open, setOpen }) => {
-  let col = open ? "black" : "red";
+  // let col = open ? "black" : "red";
   return (
     <StyledInfoIcon>
       <FontAwesomeIcon
         icon={faInfoCircle}
         size="2x"
-        color={col}
+        // color={col}
         onClick={() => setOpen(!open)}
       />
     </StyledInfoIcon>

@@ -1,0 +1,62 @@
+import React, { useState } from "react";
+import {FormGroup, Label, Input, TextArea} from "./Forms";
+
+const sendBookChapter = (params = {}) => {
+    let response;
+    let d = new Date();
+    let month = d.getMonth() < 10 ? ("0" + d.getMonth()) : d.getMonth();
+    let date = d.getFullYear() + "" + month + "" + d.getDate();
+    fetch("http://localhost:9000/createBook", {
+        method: "POST",
+        mode: "cors",
+        cache: "default",
+        credentials: "same-origin",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify({ ...params, date: date })
+    }).then(res => res.text()).then(data => { response = data });
+
+    return (response === "success");
+}
+
+const CreateChapter = (Author) => {
+    const [form, setForm] = useState({
+        name: "",
+        author: Author,
+        chapterName: "",
+        chapterContent: ""
+    });
+
+    const handleChange = ({ target }) => {
+        let name = target.name;
+        let value = target.value;
+        setForm(prevState => ({ ...prevState, [name]: value }))
+    };
+
+    return (
+        <div style={{border: "3px solid #0061a8", margin: "1px auto", width: "400px", borderRadius: "5%", paddingBottom: "2.5rem"}}>
+            <FormGroup><Label><h1>Add Chapter</h1></Label></FormGroup>
+            <FormGroup>
+                <Label htmlFor="name">Book Name: </Label>
+                <Input type="text" name="name" id="name" onChange={handleChange} />
+            </FormGroup>
+            <FormGroup>
+                <Label htmlFor="chapterName">Chapter Name: </Label>
+                <Input type="text" name="chapterName" id="chapterName" onChange={handleChange} />
+            </FormGroup>
+            <FormGroup>
+                <Label htmlFor="chapterContent">Chapter Content: </Label>
+                <TextArea rows={9} type="text" name="chapterContent" id="chapterContent" onChange={handleChange} />
+            </FormGroup>
+            <FormGroup>
+                <Input type="submit" value="Create" onClick={() => sendBookChapter(form)} />
+            </FormGroup>
+        </div>
+
+    );
+}
+
+export default CreateChapter;

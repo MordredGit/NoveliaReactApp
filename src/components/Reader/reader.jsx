@@ -4,7 +4,37 @@ import Comment from "./comment";
 import { Burger, Menu } from "./Hamburger";
 import { InfoIcon, Info } from "./InfoBox";
 
-function Reader() {
+function CommentBox() {
+    return (
+        <Row>
+            <div className="comments">
+                <div className="container mt-5">
+                    <div className="row d-flex justify-content-center">
+                        <div className="col-md-12">
+                            <div className="headings d-flex justify-content-between align-items-center mb-3">
+                                <h5>Comments(6)</h5>
+                                <div className="buttons">
+                                    <span className="badge bg-white d-flex flex-row align-items-center">
+                                        <span className="text-primary">Comments "ON"</span>
+                                        <div className="form-check form-switch">
+                                            <input className="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked />
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                            <Comment image="https://i.imgur.com/hczKIze.jpg" userName="james_olesenn" content="Hmm, This poster looks cool" dateOfComment="2 days ago" />
+                            <Comment image="https://i.imgur.com/C4egmYM.jpg" userName="olan_sams" content="Loving your work and profile!" dateOfComment="3 days ago" />
+                            <Comment image="https://i.imgur.com/0LKZQYM.jpg" userName="rashida_jones" content="Really cool Which filter are you using?" dateOfComment="3 days ago" />
+                            <Comment image="https://i.imgur.com/ZSkeqnd.jpg" userName="simona_rnasi" content="Bla bla bla!" dateOfComment="4 days ago" />
+                        </div>
+                    </div>
+                </div>
+            </div >
+        </Row >
+    );
+}
+
+function Reader({ bookName }) {
     const [openBurger, setOpenBurger] = useState(false);
     const [openInfo, setOpenInfo] = useState(false);
     const [res, setRes] = useState({});
@@ -17,10 +47,40 @@ function Reader() {
     }, []);
 
     useEffect(() => {
-        fetch("http://localhost:9000/content")
+        let newBookName = "";
+        for (let index = 0; index < bookName.length; index++) {
+            const element = bookName[index] === " " ? "%20" : bookName[index];
+            newBookName += element;
+        }
+        console.log(newBookName);
+        let url = "http://localhost:9000/content/" + newBookName /* "The%20King%20of%20Drugs"; */
+        fetch(url, {
+            method: "GET",
+            mode: "cors",
+            cache: "default",
+            credentials: "same-origin",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            redirect: "follow",
+            referrerPolicy: "no-referrer",
+        })
+            // fetch("http://localhost:9000/content", {
+            //     method: "POST",
+            //     mode: "cors",
+            //     cache: "default",
+            //     credentials: "same-origin",
+            //     headers: {
+            //         "Content-Type": "application/json"
+            //     },
+            //     redirect: "follow",
+            //     referrerPolicy: "no-referrer",
+            //     body: JSON.stringify({name: "The King of Drugs"})
+            //     // params: JSON.stringify({name: "The King of Drugs"})
+            // })
             .then(res => res.json())
             .then(con => setContent(con))
-    }, []);
+    }, [bookName]);
 
     return (
         <React.Fragment>
@@ -30,32 +90,7 @@ function Reader() {
                     <h1>{content.InBook && content.InBook[0]["Chapter"]} </h1>
                     <p>{content.InBook && content.InBook[0]["Content"]} </p>
                 </Row>
-                <Row>
-                    <div className="comments">
-                        <div className="container mt-5">
-                            <div className="row d-flex justify-content-center">
-                                <div className="col-md-12">
-                                    <div className="headings d-flex justify-content-between align-items-center mb-3">
-                                        <h5>Comments(6)</h5>
-                                        <div className="buttons">
-                                            <span className="badge bg-white d-flex flex-row align-items-center">
-                                                <span className="text-primary">Comments "ON"</span>
-                                                <div className="form-check form-switch">
-                                                    <input className="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked />
-                                                </div>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <Comment image="https://i.imgur.com/hczKIze.jpg" userName="james_olesenn" content="Hmm, This poster looks cool" dateOfComment="2 days ago" />
-                                    <Comment image="https://i.imgur.com/C4egmYM.jpg" userName="olan_sams" content="Loving your work and profile!" dateOfComment="3 days ago" />
-                                    <Comment image="https://i.imgur.com/0LKZQYM.jpg" userName="rashida_jones" content="Really cool Which filter are you using?" dateOfComment="3 days ago" />
-                                    <Comment image="https://i.imgur.com/ZSkeqnd.jpg" userName="simona_rnasi" content="Bla bla bla!" dateOfComment="4 days ago" />
-
-                                </div>
-                            </div>
-                        </div>
-                    </div >
-                </Row >
+                <CommentBox />
             </Container >
             <>
                 <div>

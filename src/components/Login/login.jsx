@@ -1,110 +1,103 @@
+import React, { useState } from "react";
+import "font-awesome/css/font-awesome.min.css";
+import "./styles.css";
+// import "./app";
+
+const handleRegister = (params = {}) => {
+  let response;
+  fetch("http://localhost:9000/register", {
+    method: "POST",
+    mode: "cors",
+    cache: "default",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
+    body: JSON.stringify(params)
+  }).then(res => res.text()).then(data => { response = data });
+
+  return (response === "success");
+}
+
 export default function Login() {
+
+  const [register, setRegister] = useState({
+    username: "",
+    email: "",
+    password: ""
+  });
+
+  const handleChange = ({ target }) => {
+    let name = target.name;
+    let value = target.value;
+    setRegister(prevState => ({ ...prevState, [name]: value }))
+  };
+
   return (
     <>
-      {/* <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script
-      src="https://kit.fontawesome.com/64d58efce2.js"
-      crossorigin="anonymous"
-    ></script>
-    <link rel="stylesheet" href="styles.css" />
-    <title>Sign in & Sign up Form</title>
-  </head>
-  <body> */}
-      <div class="container">
-        <div class="forms-container">
-          <div class="signin-signup">
-            <form action="#" class="sign-in-form">
-              <h2 class="title">Sign in</h2>
-              <div class="input-field">
-                <i class="fas fa-user"></i>
+      <div className="container1">
+        <div className="forms-container1">
+          <div className="signin-signup">
+            <form action="#" className="sign-in-form">
+              <h2 className="title">Sign in</h2>
+              <div className="input-field">
+                <i className="fas fa-user"></i>
                 <input type="text" placeholder="Username" />
               </div>
-              <div class="input-field">
-                <i class="fas fa-lock"></i>
+              <div className="input-field">
+                <i className="fas fa-lock"></i>
                 <input type="password" placeholder="Password" />
               </div>
-              <input type="submit" value="Login" class="btn solid" />
-              <p class="social-text">Or Sign in with social platforms</p>
-              <div class="social-media">
-                <a href="#" class="social-icon">
-                  <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="#" class="social-icon">
-                  <i class="fab fa-twitter"></i>
-                </a>
-                <a href="#" class="social-icon">
-                  <i class="fab fa-google"></i>
-                </a>
-                <a href="#" class="social-icon">
-                  <i class="fab fa-linkedin-in"></i>
-                </a>
-              </div>
+              <input type="submit" value="Login" className="btn solid" />
             </form>
-            <form action="#" class="sign-up-form">
-              <h2 class="title">Sign up</h2>
-              <div class="input-field">
-                <i class="fas fa-user"></i>
-                <input type="text" placeholder="Username" />
+            <form className="sign-up-form" onSubmit={() => handleRegister(register)} >
+              <h2 className="title">Sign up</h2>
+              <div className="input-field">
+                <i className="fas fa-user"></i>
+                <input type="text" placeholder="Username" name="username" onChange={handleChange} />
               </div>
-              <div class="input-field">
-                <i class="fas fa-envelope"></i>
-                <input type="email" placeholder="Email" />
+              <div className="input-field">
+                <i className="fas fa-envelope"></i>
+                <input type="email" placeholder="Email" name="email" onChange={handleChange} />
               </div>
-              <div class="input-field">
-                <i class="fas fa-lock"></i>
-                <input type="password" placeholder="Password" />
+              <div className="input-field">
+                <i className="fas fa-lock"></i>
+                <input type="password" placeholder="Password" name="password" onChange={handleChange} />
               </div>
-              <input type="submit" class="btn" value="Sign up" />
-              <p class="social-text">Or Sign up with social platforms</p>
-              <div class="social-media">
-                <a href="#" class="social-icon">
-                  <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="#" class="social-icon">
-                  <i class="fab fa-twitter"></i>
-                </a>
-                <a href="#" class="social-icon">
-                  <i class="fab fa-google"></i>
-                </a>
-                <a href="#" class="social-icon">
-                  <i class="fab fa-linkedin-in"></i>
-                </a>
-              </div>
+              <input type="submit" className="btn" value="Sign up" />
             </form>
           </div>
         </div>
 
-        <div class="panels-container">
-          <div class="panel left-panel">
-            <div class="content">
+        <div className="panels-container1">
+          <div className="panel left-panel">
+            <div className="content">
               <h3>New here ?</h3>
               <p>
                 “A journey of a thousand miles begins with a single step.”{" "}
                 <br />
                 —Lao Tzu
               </p>
-              <button class="btn transparent" id="sign-up-btn">
+              <button className="btn transparent" id="sign-up-btn" onClick={() => document.querySelector(".container1").classList.add("sign-up-mode")}>
                 Sign up
               </button>
             </div>
-            <img src="img/log.svg" class="image" alt="" />
+            <img src="img/log.svg" className="image" alt="" />
           </div>
-          <div class="panel right-panel">
-            <div class="content">
+          <div className="panel right-panel">
+            <div className="content">
               <h3>One of us ?</h3>
               <p>
                 “A room without books is like a body without a soul.” <br />~
                 Cicero
               </p>
-              <button class="btn transparent" id="sign-in-btn">
+              <button className="btn transparent" id="sign-in-btn" onClick={() => document.querySelector(".container1").classList.remove("sign-up-mode")}>
                 Sign in
               </button>
             </div>
-            <img src="img/register.svg" class="image" alt="" />
+            <img src="img/register.svg" className="image" alt="" />
           </div>
         </div>
       </div>
