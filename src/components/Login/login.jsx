@@ -42,10 +42,10 @@ const handleLogin = (params = {}) => {
     redirect: "follow",
     referrerPolicy: "no-referrer",
     body: JSON.stringify(params)
-  }).then(res => res.text()).then(data => { 
+  }).then(res => res.json()).then(data => { 
     response = data;
     console.log(response);
-    if(response.success === "true") {
+    if(response.success) {
       window.location.href = "/success";
     } else {
       window.location.href = "/fail";
@@ -62,26 +62,35 @@ export default function Login() {
     password: ""
   });
 
+  const [login, setLogin] = useState({
+    username: "",
+    password: ""
+  })
+
   const handleChange = ({ target }) => {
     let name = target.name;
     let value = target.value;
     setRegister(prevState => ({ ...prevState, [name]: value }))
   };
 
+  const handleChangeLogin = ({target}) => {
+    setLogin(prevState => ({ ...prevState, [target.name]: target.value }))
+  }
+
   return (
     <>
       <div className="container1">
         <div className="forms-container1">
           <div className="signin-signup">
-            <form action="#" className="sign-in-form" onSubmit={() => handleLogin()} >
+            <form className="sign-in-form" onSubmit={(event) => { event.preventDefault(); handleLogin(login)}} >
               <h2 className="title">Sign in</h2>
               <div className="input-field">
                 <i className="fas fa-user"></i>
-                <input type="text" placeholder="Username" />
+                <input type="text" placeholder="Username" name="username" onChange={handleChangeLogin} />
               </div>
               <div className="input-field">
                 <i className="fas fa-lock"></i>
-                <input type="password" placeholder="Password" />
+                <input type="password" placeholder="Password" name="password" onChange={handleChangeLogin} />
               </div>
               <input type="submit" value="Login" className="btn solid" />
             </form>

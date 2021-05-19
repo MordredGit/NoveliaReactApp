@@ -1,7 +1,7 @@
-import React /*, { useState }*/ from 'react';
+import React, { useState } /*, { useState }*/ from 'react';
 // import Landing from "./home";
 import Reader from "./Reader/reader";
-import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Navigation from './header';
 import Landing from './home';
 import CreateBook from './Writer/createBook';
@@ -18,6 +18,10 @@ function Main() {
     // }
     // callAPI();
     // const history = useHistory();
+
+    const [isLoggedIn, setLoggedIn] = useState(false);
+    const [user, setUser] = useState("");
+    
     return (
         <React.Fragment>
             {/* <Navigation /> */}
