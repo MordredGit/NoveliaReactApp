@@ -20,7 +20,8 @@ export const StyledMenu = styled.nav`
     width: 100%;
   }
 
-  a {
+  button {
+    all: unset;
     font-size: 1.5rem;
     // text-transform: uppercase;
     padding: 1rem 0;

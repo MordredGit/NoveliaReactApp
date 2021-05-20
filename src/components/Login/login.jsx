@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import "font-awesome/css/font-awesome.min.css";
 import "./styles.css";
+import {func} from "prop-types";
+import { useHistory } from "react-router";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 // import "./app";
 
 const handleRegister = (params = {}) => {
@@ -29,7 +33,7 @@ const handleRegister = (params = {}) => {
   // return (response === "success");
 };
 
-const handleLogin = (params = {}) => {
+const handleLogin = (params = {}, handleChangeInLogin, history) => {
   let response;
   fetch("http://localhost:9000/login", {
     method: "POST",
@@ -46,7 +50,9 @@ const handleLogin = (params = {}) => {
     response = data;
     console.log(response);
     if(response.success) {
-      window.location.href = "/success";
+      handleChangeInLogin(params.username);
+      // window.location.href = "/";
+      history.push("/")
     } else {
       window.location.href = "/fail";
     }
@@ -54,8 +60,8 @@ const handleLogin = (params = {}) => {
   });
 }
 
-export default function Login() {
-
+const Login = ({handleChangeInLogin}) => {
+  const history = useHistory();
   const [register, setRegister] = useState({
     username: "",
     email: "",
@@ -82,14 +88,14 @@ export default function Login() {
       <div className="container1">
         <div className="forms-container1">
           <div className="signin-signup">
-            <form className="sign-in-form" onSubmit={(event) => { event.preventDefault(); handleLogin(login)}} >
+            <form className="sign-in-form" onSubmit={(event) => { event.preventDefault(); handleLogin(login, handleChangeInLogin, history)}} >
               <h2 className="title">Sign in</h2>
               <div className="input-field">
-                <i className="fas fa-user"></i>
+                {/* <FontAwesomeIcon size="lg" style={{verticalAlign: "middle"}} icon={faUser} /> */}
                 <input type="text" placeholder="Username" name="username" onChange={handleChangeLogin} />
               </div>
               <div className="input-field">
-                <i className="fas fa-lock"></i>
+                <FontAwesomeIcon size="lg" style={{verticalAlign: "middle"}} icon={faLock} />
                 <input type="password" placeholder="Password" name="password" onChange={handleChangeLogin} />
               </div>
               <input type="submit" value="Login" className="btn solid" />
@@ -97,15 +103,15 @@ export default function Login() {
             <form className="sign-up-form" onSubmit={() => handleRegister(register)} >
               <h2 className="title">Sign up</h2>
               <div className="input-field">
-                <i className="fas fa-user"></i>
+                {/* <FontAwesomeIcon size="lg" style={{verticalAlign: "middle"}} icon={faUser} /> */}
                 <input type="text" placeholder="Username" name="username" onChange={handleChange} />
               </div>
               <div className="input-field">
-                <i className="fas fa-envelope"></i>
+                <FontAwesomeIcon size="lg" style={{verticalAlign: "middle"}} icon={faEnvelope} />
                 <input type="email" placeholder="Email" name="email" onChange={handleChange} />
               </div>
               <div className="input-field">
-                <i className="fas fa-lock"></i>
+                <FontAwesomeIcon size="lg" style={{verticalAlign: "middle"}} icon={faLock} />
                 <input type="password" placeholder="Password" name="password" onChange={handleChange} />
               </div>
               <input type="submit" className="btn" value="Sign up" />
@@ -146,3 +152,9 @@ export default function Login() {
     </>
   );
 }
+
+Login.propType = {
+  handleChangeInLogin: func.isRequired
+}
+
+export default Login;

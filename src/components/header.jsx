@@ -17,7 +17,7 @@ function NavBarItems({ to, icon, iconSize, text }) {
     );
 }
 
-function Navigation() {
+function Navigation({isLoggedIn, user}) {
     const [collapse, setCollapse] = useState(false);
 
     const navbarStyle = {
@@ -35,9 +35,11 @@ function Navigation() {
                     {/* <img src="" alt="" srcset=""/> */}
                     NOVELIA
                 </NavbarBrand>
-                <NavbarToggler onClick={() => setCollapse(prevState => !prevState)} />
+                <NavbarToggler style={{ backgroundColor: '#00a8fc' }} onClick={() => setCollapse(prevState => !prevState)}>
+                    <FontAwesomeIcon icon={Icons.faBars} />
+                </NavbarToggler>
                 <Collapse isOpen={collapse} navbar>
-                    <Nav navbar style={{position: "absolute", left: "50%", transform: "translateX(-50%)"}}>
+                    <Nav navbar style={{ position: "absolute", left: "50%", transform: "translateX(-50%)" }}>
                         <NavBarItems to="/" icon={Icons.faHome} size="lg" text="Home" />
                         <NavBarItems to="/createBook" icon={Icons.faPenNib} size="lg" text="Create" />
                         <NavBarItems to="/browse" icon={Icons.faCompass} size="lg" text="Browse" />
@@ -46,8 +48,9 @@ function Navigation() {
                             <UserIcon />
                         </NavItem> */}
                     </Nav>
-                    <a className="ml-auto" href="/login"><button className="login">Login</button></a>
-                    <UserIcon />
+                    {console.log(isLoggedIn, user)}
+                    {isLoggedIn && <UserIcon className="ml-auto"/>} 
+                    {!isLoggedIn && <a className="ms-auto" href="/login"><button className="login">Login</button></a>}
                 </Collapse>
             </Navbar>
 

@@ -10,6 +10,7 @@ justify-content: space-around;
 width: 2rem;
 height: 2rem;
 background: transparent;
+color: #00a8fc;
 border: none;
 cursor: pointer;
 padding: 0;
