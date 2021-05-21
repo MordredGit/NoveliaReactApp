@@ -3,12 +3,15 @@ import React, { useState } /*, { useState }*/ from 'react';
 import Reader from "./Reader/reader";
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Navigation from './header';
-import Landing from './home';
+// import Landing from './home';
 import CreateBook from './Writer/createBook';
 import Login from './Login/login';
 import CreateChapter from './Writer/createChapter';
 import Footer from './footer';
+import {Landing} from "./Landing";
+import {Browse} from "./Browsing-page";
 // import Navigation from './Navigation';
+import Navbar from "./Browsing-page/Navbar"
 
 
 function Main() {
@@ -36,7 +39,8 @@ function Main() {
                 )} />
                 <Route path='/reader' component={() => (
                     <div>
-                        <Navigation isLoggedIn={isLoggedIn} user={user} />
+                        {/* <Navigation isLoggedIn={isLoggedIn} user={user} /> */}
+                        <Navbar />
                         <Reader bookName={bookname}/>
                     </div>
                 )} />
@@ -50,21 +54,21 @@ function Main() {
                 </Route>
                 <Route exact path="/createBook" component={() => (
                     <div>
-                        <Navigation isLoggedIn={isLoggedIn} user={user} />
+                        {/* <Navigation isLoggedIn={isLoggedIn} user={user} /> */}
+                        <Navbar />
                         <CreateBook Author="Shagun" />
                     </div>
                 )} />
                 <Route exact path="/createChapter" component={() => (
                     <div>
-                        <Navigation isLoggedIn={isLoggedIn} user={user} />
+                        {/* <Navigation isLoggedIn={isLoggedIn} user={user} /> */}
+                        <Navbar />
                         <CreateChapter Author="Shagun" />
                     </div>
                 )} />
-                {/* <Route exact path="/browse">
-                    <Redirect push to={'/browse/index.html'} />
-                </Route> */}
+                <Route exact path="/browse" component={Browse}/>
                 {/* <Redirect exact from="/browse" to={'/browse/index.html'} /> */}
-                <Redirect exact from="/browse" to={'/reader'} />
+                {/* <Redirect exact from="/browse" to={'/reader'} /> */}
                 {/* <Redirect exact from="/cards" to={'/card-grid/index.html'} /> */}
                 {/* <Route exact path="/cards" component={() => (
                     <Cards setBookName={handlebookname} />

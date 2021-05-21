@@ -45,7 +45,7 @@ const CreateChapter = ({ Author }) => {
     };
 
     return (
-        <div style={{ border: "3px solid #0061a8", margin: "1px auto", width: "400px", borderRadius: "5%", paddingBottom: "2.5rem" }}>
+        <div data-aos="fade-up" style={{ border: "2px solid #0061a8", margin: "1px auto", width: "60%", borderRadius: "10px", paddingBottom: "2.5rem" }} >
             {/* <form action="/success" onSubmit={() => sendBookChapter(form)} style={{ all: "unset" }}> */}
             <FormGroup><Label><h1>Author: {Author}</h1></Label></FormGroup>
 

@@ -5,7 +5,7 @@ import "./footer.css";
 
 function Footer() {
     return (
-        <footer className="footer-bs mt-5">
+        <footer className="footer-bs mt-5" data-aos="fade-up">
             <div className="row">
                 <div className="col-md-3 footer-brand animated fadeInLeft">
                     <h2>Novelia</h2>

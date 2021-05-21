@@ -91,7 +91,7 @@ const Login = ({handleChangeInLogin}) => {
             <form className="sign-in-form" onSubmit={(event) => { event.preventDefault(); handleLogin(login, handleChangeInLogin, history)}} >
               <h2 className="title">Sign in</h2>
               <div className="input-field">
-                {/* <FontAwesomeIcon size="lg" style={{verticalAlign: "middle"}} icon={faUser} /> */}
+                <FontAwesomeIcon size="lg" style={{verticalAlign: "middle"}} icon={faUser} />
                 <input type="text" placeholder="Username" name="username" onChange={handleChangeLogin} />
               </div>
               <div className="input-field">
@@ -103,7 +103,7 @@ const Login = ({handleChangeInLogin}) => {
             <form className="sign-up-form" onSubmit={() => handleRegister(register)} >
               <h2 className="title">Sign up</h2>
               <div className="input-field">
-                {/* <FontAwesomeIcon size="lg" style={{verticalAlign: "middle"}} icon={faUser} /> */}
+                <FontAwesomeIcon size="lg" style={{verticalAlign: "middle"}} icon={faUser} />
                 <input type="text" placeholder="Username" name="username" onChange={handleChange} />
               </div>
               <div className="input-field">
