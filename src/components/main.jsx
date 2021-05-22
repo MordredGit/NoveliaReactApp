@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
 import Reader from "./Reader/reader";
-import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import CreateBook from './Writer/createBook';
 import Login from './Login/login';
 import CreateChapter from './Writer/createChapter';
@@ -10,6 +10,7 @@ import { Landing } from "./Landing";
 import { Browse } from "./Browsing-page";
 import Navbar from "./Browsing-page/Navbar";
 import BookCardComp from "./BookCardBoody";
+import AllBooks from './AllBooks';
 
 
 function Main() {
@@ -18,7 +19,7 @@ function Main() {
     const [user, setUser] = useState("");
     const [bookname, setBookName] = useStateWithCallbackLazy("");
     const [logout, setLogOut] = useState(false);
-    
+
     const handleChange = (username) => {
         setLoggedIn(true);
         setUser(username);
@@ -44,28 +45,19 @@ function Main() {
                 setLoggedIn(true);
                 setUser(localStorage.getItem("user"));
             }
-            // localStorage.removeItem("user", user);
         }
     }, [isLoggedIn, user]);
 
-    // useEffect(() => {
-    //     history.push("/reader");
-    // }, [bookname, history]);
-
-    debugger;
     return (
         <React.Fragment>
             <Switch>
                 <Route exact path='/' component={() => (
                     <div>
-                        {/* {handleLogOut()} */}
-                        {/* {console.log(isLoggedIn, user)} */}
                         <Landing handleLogOut={handleLogOut} isLoggedIn={isLoggedIn} user={user} />
                     </div>
                 )} />
                 <Route path='/reader' component={() => (
                     <div>
-                        {/* <Navigation isLoggedIn={isLoggedIn} user={user} /> */}
                         {console.log(bookname)}
                         <Navbar handleLogOut={handleLogOut} isLoggedIn={isLoggedIn} user={user} />
                         <Reader bookName={bookname} />
@@ -79,7 +71,6 @@ function Main() {
                 </Route>
                 <Route exact path="/createBook" component={() => (
                     <div>
-                        {/* <Navigation isLoggedIn={isLoggedIn} user={user} /> */}
                         <Navbar handleLogOut={handleLogOut} isLoggedIn={isLoggedIn} user={user} />
                         <CreateBook Author={user} />
                         <CreateChapter Author={user} />
@@ -87,7 +78,6 @@ function Main() {
                 )} />
                 <Route exact path="/createChapter" component={() => (
                     <div>
-                        {/* <Navigation isLoggedIn={isLoggedIn} user={user} /> */}
                         <Navbar handleLogOut={handleLogOut} isLoggedIn={isLoggedIn} user={user} />
                         <CreateChapter Author={user} />
                     </div>
@@ -108,6 +98,12 @@ function Main() {
                     {/* {setLogOut(true)} */}
                     <Redirect push to="/" />
                 </Route>
+                <Route exact path="/allbooks" component={() => (
+                    <div>
+                        <Navbar handleLogOut={handleLogOut} isLoggedIn={isLoggedIn} user={user} />
+                        <AllBooks setBookName={setBookName} />
+                    </div>
+                )} />
                 <Route exact path="/success" component={() => (
                     <h1>Successful</h1>
                 )} />

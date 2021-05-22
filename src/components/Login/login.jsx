@@ -30,7 +30,8 @@ const handleRegister = (params = {}, handleChangeInLogin, history, handleError) 
       handleChangeInLogin(params.username);
       history.push("/")
     } else {
-      if (response.err.keyValue.email) {
+      console.log(Object.keys(response.err), "keyValue" in response.err);
+      if ("keyValue" in response.err && response.err.keyValue.email) {
         response.err["message"] = "A user with the same email exists!";
       }
       handleError(response.message + response.err.message);

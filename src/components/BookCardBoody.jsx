@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 // import { useHistory } from "react-router";s
 import "./CardStyles.css";
 
@@ -142,7 +142,8 @@ function BookCardComp({setBookName}) {
       </div>
 
       <div className="row align-items-center text-center mt-5 ml-3 mr-3">
-        {/* <div className="col-md-4">
+        
+        <div className="col-md-4">
           <div className="card">
             <img
               src="https://i.pinimg.com/originals/5c/e8/3d/5ce83d9e0445f4e1c3e9af399d5e185d.jpg"
@@ -151,19 +152,18 @@ function BookCardComp({setBookName}) {
               alt="..."
             />
             <div className="card-body cardBody">
-              <h5 className="card-title">Card title</h5>
+              <h5 className="card-title">"एक "सूखा " गुलाब"</h5>
               <p className="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
+              यही तो मैं उस से कहती हूं पर वह मानता ही नहीं. कहता है, अगर यह सब सच नहीं होता तो आर्थिक मंदी अभी…
               </p>
-              <button onClick={() => handleClick("")} className="btn btn1 btn-primary">
+              <button onClick={() => handleClick("एक \"सूखा \" गुलाब")} className="btn btn1 btn-primary">
                 Read
               </button>
             </div>
           </div>
-        </div> */}
+        </div>
 
-        {/* <div className="col-md-4">
+        <div className="col-md-4">
           <div className="card">
             <img
               src="https://i.pinimg.com/originals/5c/e8/3d/5ce83d9e0445f4e1c3e9af399d5e185d.jpg"
@@ -172,19 +172,19 @@ function BookCardComp({setBookName}) {
               alt="..."
             />
             <div className="card-body cardBody">
-              <h5 className="card-title">Card title</h5>
+              <h5 className="card-title">大ハズレだと追放された転生重騎士...</h5>
               <p className="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
+              じゅ……重騎士だと！？　どういうことだ！　
+              〈ステータス〉が軒並み低い上に、！
               </p>
-              <button onClick={() => handleClick("")} className="btn btn1 btn-primary">
+              <button onClick={() => handleClick("大ハズレだと追放された転生重騎士はゲーム知識で無双する")} className="btn btn1 btn-primary">
                 Read
               </button>
             </div>
           </div>
-        </div> */}
+        </div>
 
-        {/* <div className="col-md-4">
+        <div className="col-md-4">
           <div className="card">
             <img
               src="https://i.pinimg.com/originals/5c/e8/3d/5ce83d9e0445f4e1c3e9af399d5e185d.jpg"
@@ -193,17 +193,17 @@ function BookCardComp({setBookName}) {
               alt="..."
             />
             <div className="card-body cardBody">
-              <h5 className="card-title">Card title</h5>
+              <h5 className="card-title">All Books</h5>
               <p className="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
+                All the books present on the site.
               </p>
-              <button onClick={() => handleClick("")} className="btn btn1 btn-primary">
+              <p> .</p>
+              <Link to="/allbooks" className="btn btn1 btn-primary">
                 Read
-              </button>
+              </Link>
             </div>
           </div>
-        </div> */}
+        </div>
       </div>
     </div>
   );

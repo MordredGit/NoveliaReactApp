@@ -5,29 +5,15 @@ import Feature from "./Feature";
 import "./styles.css";
 import { Link } from "react-router-dom";
 
-// function OneBook({src, title, desc}) {
-//   return (
-//     <a to="/cards" style={{textDecoration: "none"}} class="col-md-4 main-page-card ">
-//       <div class="view overlay z-depth-1-half">
-//         <img
-//           src={src}
-//           class="img-fluid"
-//           alt=""
-//         />
-//         <div class="mask rgba-white-slight"></div>
-//       </div>
-
-//       <h4 class="my-4 font-weight-bold text-white">{title}</h4>
-//       <p class="text-white">{desc}</p>
-//     </a>
-//   );
-// }
-
-function Body({isLoggedIn, user, handleLogOut}) {
+function Body({ isLoggedIn, user, handleLogOut }) {
   return (
     <div style={{ backgroundColor: "black" }}>
       <section id="section-0">
-        <Navbar handleLogOut={handleLogOut} isLoggedIn={isLoggedIn} user={user} />
+        <Navbar
+          handleLogOut={handleLogOut}
+          isLoggedIn={isLoggedIn}
+          user={user}
+        />
         <Header />
       </section>
       <section id="section-1" className="text-center">
@@ -46,7 +32,7 @@ function Body({isLoggedIn, user, handleLogOut}) {
           >
             <div class="view overlay z-depth-1-half">
               <img
-                style={{ width: "70%", maxHeight:"500px" }}
+                style={{ width: "70%", maxHeight: "500px" }}
                 src="https://images-na.ssl-images-amazon.com/images/I/81QSVDBGkEL.jpg"
                 class="img-fluid"
                 alt=""
@@ -68,7 +54,7 @@ function Body({isLoggedIn, user, handleLogOut}) {
           >
             <div class="view overlay z-depth-1-half">
               <img
-                style={{ width: "70%", maxHeight:"500px" }}
+                style={{ width: "70%", maxHeight: "500px" }}
                 src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1539302358l/42281998._SY475_.jpg"
                 class="img-fluid"
                 alt=""
@@ -90,7 +76,7 @@ function Body({isLoggedIn, user, handleLogOut}) {
           >
             <div class="view overlay z-depth-1-half">
               <img
-                style={{ width: "70%", maxHeight:"500px" }}
+                style={{ width: "70%", maxHeight: "500px" }}
                 src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1590598478l/53174067.jpg"
                 class="img-fluid"
                 alt=""
@@ -114,7 +100,7 @@ function Body({isLoggedIn, user, handleLogOut}) {
           >
             <div class="view overlay z-depth-1-half">
               <img
-                style={{ width: "70%", maxHeight:"500px" }}
+                style={{ width: "70%", maxHeight: "500px" }}
                 src="https://kbimages1-a.akamaihd.net/dd1baacc-184b-4f28-a7d5-6dbe70816fb7/353/569/90/False/a-game-of-thrones.jpg"
                 class="img-fluid"
                 alt=""
@@ -136,7 +122,7 @@ function Body({isLoggedIn, user, handleLogOut}) {
           >
             <div class="view overlay z-depth-1-half">
               <img
-                style={{ width: "70%", maxHeight:"500px" }}
+                style={{ width: "70%", maxHeight: "500px" }}
                 src="https://images-na.ssl-images-amazon.com/images/I/91EVnJvVTjL.jpg"
                 class="img-fluid"
                 alt=""
@@ -158,7 +144,7 @@ function Body({isLoggedIn, user, handleLogOut}) {
           >
             <div class="view overlay z-depth-1-half">
               <img
-                style={{ width: "70%", maxHeight:"500px" }}
+                style={{ width: "70%", maxHeight: "500px" }}
                 src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1375156317l/18270118.jpg"
                 class="img-fluid"
                 alt=""

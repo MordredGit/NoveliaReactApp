@@ -26,7 +26,7 @@ function Reader({ bookName }) {
         fetch(url)
             .then(res => res.json())
             .then(res => setRes(res))
-    }, []);
+    }, [bookName]);
 
     useEffect(() => {
         let newBookName = "";

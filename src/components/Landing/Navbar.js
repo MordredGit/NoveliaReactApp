@@ -9,7 +9,7 @@ const handleClick = (handleLogOut) => {
 const Navbar = ({ isLoggedIn, user, handleLogOut }) => {
 
   return (
-    <nav class="navbar navbar-expand-lg navbar-dark bg-transperent px-0 py-3">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent px-0 py-3">
       <div class="container-xl">
         <Link class="navbar-brand" to="/">
           Novelia

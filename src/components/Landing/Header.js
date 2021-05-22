@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react";
 
 export default function Header() {
-    return (
-        <header>
-            <div class="container text-center">
+  return (
+    <header>
+      <div class="container text-center">
         <div class="row align-items-center">
           <div class="col-md-7 col-sm-12 text-white" data-aos="fade-right">
             <h1>Novelia</h1>
@@ -15,5 +15,5 @@ export default function Header() {
         </div>
       </div>
     </header>
-    )
+  );
 }
