@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FormGroup, Label, Input, TextArea } from "./Forms";
 
-const sendBookChapter = (params = {}) => {
+const sendBookChapter = (params = {}, setSuccess) => {
     let response;
     let d = new Date();
     let month = d.getMonth() < 10 ? ("0" + d.getMonth()) : d.getMonth();
@@ -18,13 +18,10 @@ const sendBookChapter = (params = {}) => {
         referrerPolicy: "no-referrer",
         body: JSON.stringify({ ...params, date: date })
     }).then(res => res.text()).then(data => {
-        response = data
+        response = data;
         console.log(response);
-        if (response === "success") {
-            window.location.href = "/success";
-        } else {
-            window.location.href = "/fail";
-        }
+        setSuccess(response);
+        return response.success;
     });
 }
 
@@ -36,6 +33,8 @@ const CreateChapter = ({ Author }) => {
         chapterContent: ""
     });
 
+    const [success, setSuccess] = useState("");
+
     // const [error, setError] = useState("");
 
     const handleChange = ({ target }) => {
@@ -45,7 +44,7 @@ const CreateChapter = ({ Author }) => {
     };
 
     return (
-        <div data-aos="fade-up" style={{ border: "2px solid #0061a8", margin: "1px auto", width: "60%", borderRadius: "10px", paddingBottom: "2.5rem" }} >
+        <div data-aos="fade-up" className="mb-5" style={{ border: "2px solid #0061a8", margin: "1px auto", width: "60%", borderRadius: "10px", paddingBottom: "2.5rem" }} >
             {/* <form action="/success" onSubmit={() => sendBookChapter(form)} style={{ all: "unset" }}> */}
             <FormGroup><Label><h1>Author: {Author}</h1></Label></FormGroup>
 
@@ -63,7 +62,10 @@ const CreateChapter = ({ Author }) => {
                 <TextArea rows={9} type="text" name="chapterContent" id="chapterContent" onChange={handleChange} required />
             </FormGroup>
             <FormGroup>
-                <Input type="submit" value="Create" onClick={() => sendBookChapter(form)} />
+                <Input type="submit" value="Create" onClick={() => sendBookChapter(form, setSuccess)} />
+            </FormGroup>
+            <FormGroup>
+                <Label style={{color: "red"}}>{success}</Label>
             </FormGroup>
             {/* <FormGroup><Label><h1>{error}</h1></Label></FormGroup> */}
             {/* </form> */}

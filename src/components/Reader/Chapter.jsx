@@ -2,7 +2,7 @@ import { Row } from "react-bootstrap";
 
 export default function Chapter({ bookName, content, chapterNo }) {
     return (
-        <div style={{ padding: "1.5rem", boxShadow: " 0 10px 10px 0 grey, 0 5px 15px 0 grey" }} >
+        <div style={{ padding: "1.5rem", boxShadow: " 0 2px 5px 0 grey, 0 2px 15px 0 grey", borderRadius: "20px" }} >
             <Row>
                 <span style={{ float: "right" }}>Book Name: {bookName}</span>
             </Row>

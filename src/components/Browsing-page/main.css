@@ -12,14 +12,14 @@
   font-weight: 400;
   text-align: center;
 }
-/* 
-img {
+
+/* img {
   max-height: 200px;
   width: auto;
   vertical-align: middle;
 } */
 
-.btn {
+.btn1 {
   color: #301d1d;
   padding: 0.8rem;
   font-size: 14px;
@@ -33,8 +33,26 @@ img {
   background: transparent;
 }
 
-.btn:hover {
-  background-color: rgba(255, 255, 255, 0.12);
+.btn1:hover {
+  background-color: rgb(255, 255, 255);
+}
+
+.btn2 {
+  color: #7e4d4d;
+  padding: 0.8rem;
+  font-size: 14px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  font-weight: 400;
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+}
+
+.btn2:hover {
+  background-color: rgb(255, 255, 255);
 }
 
 .cards {

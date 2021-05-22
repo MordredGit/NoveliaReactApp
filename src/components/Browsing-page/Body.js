@@ -8,7 +8,7 @@ import "./imgstyles.css";
 function Body() {
   return (
     <div className="BROWSE_BODY">
-      <Navbar />
+      {/* <Navbar /> */}
       <BrowseCards />
       <Footer />
     </div>

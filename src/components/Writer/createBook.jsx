@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import {FormGroup, Label, Input} from "./Forms";
+import { FormGroup, Label, Input } from "./Forms";
 
-const sendBookDetails = (form) => {
+const sendBookDetails = (form, setMessage) => {
     let response;
     let d = new Date();
     let month = d.getMonth() < 10 ? ("0" + d.getMonth()) : d.getMonth();
@@ -17,12 +17,28 @@ const sendBookDetails = (form) => {
         redirect: "follow",
         referrerPolicy: "no-referrer",
         body: JSON.stringify({ ...form, date: date })
-    }).then(res => res.text()).then(data => { response = data });
-    // console.log(file);
-    return (response === "success");
+    }).then(res => {
+        if (res.status === 200) {
+            return res.json();
+        }
+    })
+        .then(data => {
+            response = data;
+            if (response.success) {
+                console.log(response.message);
+                setMessage(response.message);
+            } else {
+                console.log(response.message);
+                setMessage(response.message);
+            }
+
+        })
+        .catch(err => console.log(err));
 }
 
 const CreateBook = ({ Author }) => {
+
+    const [message, setMessage] = useState("");
 
     const [form, setForm] = useState({
         name: "",
@@ -41,7 +57,7 @@ const CreateBook = ({ Author }) => {
     };
 
     return (
-        <div data-aos="fade-up" style={{border: "2px solid #0061a8", margin: "1px auto", width: "60%", borderRadius: "20px", paddingBottom: "2.5rem"}}>
+        <div data-aos="fade-up" className="mb-5" style={{ border: "2px solid #0061a8", margin: "1px auto", width: "60%", borderRadius: "20px", paddingBottom: "2.5rem" }}>
             <FormGroup><Label><h1>Create Book</h1></Label></FormGroup>
             {/* <FormGroup>
                 <Label htmlFor="cover">Cover</Label>
@@ -60,8 +76,9 @@ const CreateBook = ({ Author }) => {
                 <Input type="text" name="language" id="language" onChange={handleChange} />
             </FormGroup>
             <FormGroup>
-                <Input type="submit" value="Create" onClick={() => sendBookDetails(form)} />
+                <Input type="submit" value="Create" onClick={() => sendBookDetails(form, setMessage)} />
             </FormGroup>
+            <FormGroup><Label style={{ color: "red" }}>{message} </Label></FormGroup>
         </div>
 
     );

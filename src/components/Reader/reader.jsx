@@ -17,7 +17,13 @@ function Reader({ bookName }) {
     const [chapterNo, setChapterNo] = useState(0);
 
     useEffect(() => {
-        fetch("http://localhost:9000/data")
+        let newBookName = "";
+        for (let index = 0; index < bookName.length; index++) {
+            const element = bookName[index] === " " ? "%20" : bookName[index];
+            newBookName += element;
+        }
+        let url = "http://localhost:9000/data/" + newBookName
+        fetch(url)
             .then(res => res.json())
             .then(res => setRes(res))
     }, []);
@@ -28,7 +34,7 @@ function Reader({ bookName }) {
             const element = bookName[index] === " " ? "%20" : bookName[index];
             newBookName += element;
         }
-        console.log(newBookName);
+        // console.log(newBookName);
         let url = "http://localhost:9000/content/" + newBookName /* "The%20King%20of%20Drugs"; */
         fetch(url, {
             method: "GET",

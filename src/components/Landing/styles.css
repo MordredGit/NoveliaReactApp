@@ -87,7 +87,7 @@ header .container .col-md-7 p {
   height: 50vh;
 }
 
-/* ------Footer----- */
+/* ------Footer-----
 .footer-bs {
   background-color: black;
   padding: 60px 40px;
@@ -190,4 +190,4 @@ header .container .col-md-7 p {
   .footer-bs .footer-ns {
     border-left: solid 1px rgba(255, 255, 255, 0.1);
   }
-}
+} */

@@ -5,7 +5,7 @@ import "./footer.css";
 
 function Footer() {
     return (
-        <footer className="footer-bs mt-5" data-aos="fade-up">
+        <footer className="footer-bs" data-aos="fade-up">
             <div className="row">
                 <div className="col-md-3 footer-brand animated fadeInLeft">
                     <h2>Novelia</h2>
@@ -47,7 +47,7 @@ function Footer() {
                     <div className="input-group">
                         <input type="text" className="form-control" placeholder="Search for..." />
                         <span className="input-group-btn">
-                            <button className="btn btn-default" type="button"><FontAwesomeIcon icon={faEnvelope} /> </button>
+                            <button className="btn btn1 btn-default" type="button"><FontAwesomeIcon icon={faEnvelope} /> </button>
                         </span>
                     </div>
                 </div>

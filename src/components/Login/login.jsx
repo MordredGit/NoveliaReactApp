@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import "font-awesome/css/font-awesome.min.css";
-import "./styles.css";
-import {func} from "prop-types";
+import { func } from "prop-types";
 import { useHistory } from "react-router";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
-// import "./app";
+import "./styles.css";
 
-const handleRegister = (params = {}) => {
+const handleRegister = (params = {}, handleChangeInLogin, history, handleError) => {
   let response;
   fetch("http://localhost:9000/register", {
     method: "POST",
@@ -20,20 +17,31 @@ const handleRegister = (params = {}) => {
     redirect: "follow",
     referrerPolicy: "no-referrer",
     body: JSON.stringify(params)
-  }).then(res => res.text()).then(data => { 
+  }).then(res => {
+    if (res.status === 200) {
+      return res.json();
+    } else {
+      handleError("RESPONSE STATUS: " + res.status);
+    }
+  }).then(data => {
     response = data;
     console.log(response);
-    if(response.success === "true") {
-      window.location.href = "/success";
+    if (response.success) {
+      handleChangeInLogin(params.username);
+      history.push("/")
     } else {
-      window.location.href = "/fail";
+      if (response.err.keyValue.email) {
+        response.err["message"] = "A user with the same email exists!";
+      }
+      handleError(response.message + response.err.message);
     }
-  });
+  })
+    .catch(err => console.log(err));
 
   // return (response === "success");
 };
 
-const handleLogin = (params = {}, handleChangeInLogin, history) => {
+const handleLogin = (params = {}, handleChangeInLogin, history, handleError) => {
   let response;
   fetch("http://localhost:9000/login", {
     method: "POST",
@@ -46,21 +54,28 @@ const handleLogin = (params = {}, handleChangeInLogin, history) => {
     redirect: "follow",
     referrerPolicy: "no-referrer",
     body: JSON.stringify(params)
-  }).then(res => res.json()).then(data => { 
-    response = data;
-    console.log(response);
-    if(response.success) {
-      handleChangeInLogin(params.username);
-      // window.location.href = "/";
-      history.push("/")
-    } else {
-      window.location.href = "/fail";
+  }).then(res => {
+    if (res.status === 200) {
+      return res.json();
+    } else if (res.status === 401) {
+      handleError("Wrong Username or password");
     }
-  
-  });
+  })
+    .then(data => {
+      response = data;
+      if (response.success) {
+        handleChangeInLogin(params.username);
+        history.push("/")
+      } else {
+        console.log(response.message);
+        handleError(response.message);
+      }
+
+    })
+    .catch(err => console.log(err));
 }
 
-const Login = ({handleChangeInLogin}) => {
+const Login = ({ handleChangeInLogin }) => {
   const history = useHistory();
   const [register, setRegister] = useState({
     username: "",
@@ -71,7 +86,9 @@ const Login = ({handleChangeInLogin}) => {
   const [login, setLogin] = useState({
     username: "",
     password: ""
-  })
+  });
+
+  const [error, setError] = useState("");
 
   const handleChange = ({ target }) => {
     let name = target.name;
@@ -79,8 +96,12 @@ const Login = ({handleChangeInLogin}) => {
     setRegister(prevState => ({ ...prevState, [name]: value }))
   };
 
-  const handleChangeLogin = ({target}) => {
+  const handleChangeLogin = ({ target }) => {
     setLogin(prevState => ({ ...prevState, [target.name]: target.value }))
+  };
+
+  const handleError = (error) => {
+    setError(error);
   }
 
   return (
@@ -88,33 +109,36 @@ const Login = ({handleChangeInLogin}) => {
       <div className="container1">
         <div className="forms-container1">
           <div className="signin-signup">
-            <form className="sign-in-form" onSubmit={(event) => { event.preventDefault(); handleLogin(login, handleChangeInLogin, history)}} >
+            <form className="sign-in-form" onSubmit={(event) => { event.preventDefault(); handleLogin(login, handleChangeInLogin, history, handleError) }} >
               <h2 className="title">Sign in</h2>
               <div className="input-field">
-                <FontAwesomeIcon size="lg" style={{verticalAlign: "middle"}} icon={faUser} />
-                <input type="text" placeholder="Username" name="username" onChange={handleChangeLogin} />
+                <span></span>
+                <input required type="text" placeholder="Username" name="username" onChange={handleChangeLogin} />
               </div>
               <div className="input-field">
-                <FontAwesomeIcon size="lg" style={{verticalAlign: "middle"}} icon={faLock} />
-                <input type="password" placeholder="Password" name="password" onChange={handleChangeLogin} />
+                <span></span>
+                <input required type="password" placeholder="Password" name="password" onChange={handleChangeLogin} />
               </div>
               <input type="submit" value="Login" className="btn solid" />
+              <label style={{ color: "red" }}>{error}</label>
             </form>
-            <form className="sign-up-form" onSubmit={() => handleRegister(register)} >
+
+            <form className="sign-up-form" onSubmit={(event) => { event.preventDefault(); handleRegister(register, handleChangeInLogin, history, handleError);}} >
               <h2 className="title">Sign up</h2>
               <div className="input-field">
-                <FontAwesomeIcon size="lg" style={{verticalAlign: "middle"}} icon={faUser} />
-                <input type="text" placeholder="Username" name="username" onChange={handleChange} />
+                <span></span>
+                <input required type="text" placeholder="Username" name="username" onChange={handleChange} />
               </div>
               <div className="input-field">
-                <FontAwesomeIcon size="lg" style={{verticalAlign: "middle"}} icon={faEnvelope} />
-                <input type="email" placeholder="Email" name="email" onChange={handleChange} />
+                <span></span>
+                <input required type="email" placeholder="Email" name="email" onChange={handleChange} />
               </div>
               <div className="input-field">
-                <FontAwesomeIcon size="lg" style={{verticalAlign: "middle"}} icon={faLock} />
-                <input type="password" placeholder="Password" name="password" onChange={handleChange} />
+                <span></span>
+                <input required type="password" placeholder="Password" name="password" onChange={handleChange} />
               </div>
               <input type="submit" className="btn" value="Sign up" />
+              <label style={{ color: "red" }}>{error}</label>
             </form>
           </div>
         </div>
